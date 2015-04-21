@@ -1,0 +1,79 @@
+<html>
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />    
+<title>Better Alamance Volunteers</title>
+<link rel=stylesheet href="css/style.css">
+    </head><body>
+<header><img src="img/bap.png"></header>
+<div class="searchForm">
+<p>Search</p> 
+<form name="input" action="search.php" method="post">
+
+<fieldset>
+<legend>Select Your Age Group:</legend>
+	<input type="radio" name="Age Group" value="Under 18" /> Under 18
+	<input type="radio" name="Age Group" value="18-54" /> 18-54
+    <input type="radio" name="Age Group" value="55+" /> 55+
+  </fieldset>
+ <fieldset>   
+<legend>Choose a Category:</legend>
+<input type="radio" name="Category" value="Animals" /> Animals      
+<input type="radio" name="Category" value="Arts/Culture" /> Arts and Culture
+<input type="radio" name="Category" value="Community" /> Community 
+<input type="radio" name="Category" value="Crisis Support" /> Crisis Support 
+<input type="radio" name="Category" value="Environment" /> Environment <input type="radio" name="Category" value="Faith Based" /> Faith Based
+<input type="radio" name="Category" value="People with Disabilities" /> People with Disabilities
+<input type="radio" name="Category" value="Seniors" /> Seniors
+<input type="radio" name="Category" value="Youth" /> Youth     
+</fieldset>
+
+<input type="submit" value="Submit" />   
+</form>   
+</div>    
+<div class="db">   
+<?php
+
+$mysqlserver="localhost";
+$mysqlusername="megmdesi_admin";
+$mysqlpassword="Nozrb302@";
+$link=mysql_connect($mysqlserver, $mysqlusername, $mysqlpassword) or die ("Error connecting to mysql server: ".mysql_error());
+
+$dbname = 'megmdesi_betteralamancevolunteers';    // change this to the name of your database
+mysql_select_db($dbname, $link) or die ("Error selecting specified database on mysql server: ".mysql_error());
+
+$opquery="SELECT * FROM opportunity";
+$opresult=mysql_query($opquery) or die ("Query to get data from firsttable failed: ".mysql_error());
+
+echo "<table border='1'>";
+echo "<tr>";
+echo "<th>Organization</th>
+            <th>Category</th>
+            <th>Location</th>
+            <th>Time</th>
+            <th>Age Group</th>
+            <th>Description</th>";
+echo "</tr>";
+while ($oprow=mysql_fetch_array($opresult)) {
+	$org=$oprow["Organization"];
+	$cat=$oprow["Category"];
+	$loc=$oprow["Location"];
+	$time=$oprow["Time"];
+	$des=$oprow["Description"];
+    $age=$oprow["Age Group"];
+	echo "<tr>";
+	echo "<td>$org</td>
+	<td>$cat</td>
+	<td>$loc</td>
+	<td>$time</td>
+	<td>$age</td>
+    <td>$des</td>";
+	echo "</tr>";
+}
+echo "</table>";
+
+?>
+</div>     
+    
+</body>
+</html>
