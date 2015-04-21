@@ -21,3 +21,23 @@ float: left;
 width: 275px;
 float: left;
 }
+
+.table.table-bordered {
+border: 1px solid black;
+}
+
+ul {
+list-style: none;
+display: inline-block;    
+}
+
+ul li {
+display: inline-block;
+}
+
+li a {
+display: inline-block;
+background: black;
+color: white;
+padding: 5px;    
+}
