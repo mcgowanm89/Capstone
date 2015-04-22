@@ -40,36 +40,18 @@ if ($page <= 0)
     <body>
 <header><img src="img/bap.png"></header>
 <div class="searchForm">
-<p>Search</p> 
-<form name="input" action="search.php" method="post">
-
-<fieldset>
-<legend>Select Your Age Group:</legend>
-	<input type="radio" name="Age Group" value="Under 18" /> Under 18
-	<input type="radio" name="Age Group" value="18-54" /> 18-54
-    <input type="radio" name="Age Group" value="55+" /> 55+
-  </fieldset>
- <fieldset>   
-<legend>Choose a Category:</legend>
-<input type="radio" name="Category" value="Animals" /> Animals      
-<input type="radio" name="Category" value="Arts/Culture" /> Arts and Culture
-<input type="radio" name="Category" value="Community" /> Community 
-<input type="radio" name="Category" value="Crisis Support" /> Crisis Support 
-<input type="radio" name="Category" value="Environment" /> Environment <input type="radio" name="Category" value="Faith Based" /> Faith Based
-<input type="radio" name="Category" value="People with Disabilities" /> People with Disabilities
-<input type="radio" name="Category" value="Seniors" /> Seniors
-<input type="radio" name="Category" value="Youth" /> Youth     
-</fieldset>
-
-<input type="submit" value="Submit" />   
-</form>   
+<form action="search.php" method="get" >
+Please search here:
+    <input type="text" name="query" id="text"  />
+ <input type="submit" name="submit" id="search" value="Search" />
+</form>  
 </div>    
 <div class="db">   
     <?php
         $reload = $_SERVER['PHP_SELF'] . "?tpages=" . $tpages;
                    
         echo "<table class='table table-bordered'>";
-        echo "<thead><tr><th>Organization</th> <th>Category</th> <th>Location</th> <th>Time</th> <th>Age Group</th> <th>Description</th></tr></thead>";
+        
                    
         for ($i = $start; $i < $end; $i++) {
                        
@@ -78,14 +60,30 @@ if ($page <= 0)
                         }
                       
         echo "<tr " . $cls . ">";
-        echo '<td>' . mysql_result($result, $i, 'Organization') . '</td>';
-        echo '<td>' . mysql_result($result, $i, 'Category') . '</td>';
+        
+        if (mysql_result($result, $i, 'Category') == 'Arts/Culture') {
+							echo "<td class='icons'><img src='img/anc.png'/></td>";};
+        if (mysql_result($result, $i, 'Category') == 'Seniors') {
+							echo "<td class='icons'><img src='img/senior.png'/></td>";};  
+        if (mysql_result($result, $i, 'Category') == 'Youth') {
+							echo "<td class='icons'><img src='img/youth.png'/></td>";}; 
+        if (mysql_result($result, $i, 'Category') == 'Animals') {
+							echo "<td class='icons'><img src='img/pet.png'/></td>";}; 
+        if (mysql_result($result, $i, 'Category') == 'Community') {
+							echo "<td class='icons'><img src='img/comm.png'/></td>";}; 
+         if (mysql_result($result, $i, 'Category') == 'Crisis Support') {
+							echo "<td class='icons'><img src='img/cs.png'/></td>";};
+         if (mysql_result($result, $i, 'Category') == 'Environment') {
+							echo "<td class='icons'><img src='img/leaf.png'/></td>";};
+         if (mysql_result($result, $i, 'Category') == 'Faith Based') {
+							echo "<td class='icons'><img src='img/pray.png'/></td>";};
+         if (mysql_result($result, $i, 'Category') == 'People with Disabilities') {
+							echo "<td class='icons'><img src='img/chair.png'/></td>";}; 
+        echo '<td>' . mysql_result($result, $i, 'Organization') . '</td>';    
         echo '<td>' . mysql_result($result, $i, 'Location') . '</td>';
         echo '<td>' . mysql_result($result, $i, 'Time') . '</td>';
         echo '<td>' . mysql_result($result, $i, 'Age Group') . '</td>';    
         echo '<td>' . mysql_result($result, $i, 'Description') . '</td>';
-            if (($result['Category'] == 'Arts/Culture')) {
-							echo "<td><img src='img/anc.png'/></td>";}
         echo "</tr>";
                     }       
                    

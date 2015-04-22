@@ -5,11 +5,13 @@ margin: 0 auto;
 
 header {
 margin: 0 auto;
-align-content: center;    
+align-content: center;  
+    
 }
 
 img {
 margin: 0 auto;
+margin-left: 30px;    
 }
 
 .db {
@@ -22,9 +24,6 @@ width: 275px;
 float: left;
 }
 
-.table.table-bordered {
-border: 1px solid black;
-}
 
 ul {
 list-style: none;
@@ -40,4 +39,13 @@ display: inline-block;
 background: black;
 color: white;
 padding: 5px;    
+}
+
+tr {
+background: #eed5b7;
+padding-bottom: 30px;
+}
+
+td {
+margin-bottom: 20px;
 }
